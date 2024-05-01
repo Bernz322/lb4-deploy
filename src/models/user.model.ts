@@ -3,11 +3,11 @@ import {Entity, model, property} from '@loopback/repository';
 @model()
 export class User extends Entity {
   @property({
-    // type: 'string',
+    type: 'string',
     id: true,
     mongodb: {dataType: 'ObjectID'},
   })
-  id: number;
+  id: string;
 
   @property({
     type: 'string',

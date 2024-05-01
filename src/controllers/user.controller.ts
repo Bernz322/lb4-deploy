@@ -13,7 +13,6 @@ import {
   param,
   patch,
   post,
-  put,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -72,25 +71,6 @@ export class UserController {
     return this.userRepository.find(filter);
   }
 
-  @patch('/users')
-  @response(200, {
-    description: 'User PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
-  })
-  async updateAll(
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(User, {partial: true}),
-        },
-      },
-    })
-    user: User,
-    @param.where(User) where?: Where<User>,
-  ): Promise<Count> {
-    return this.userRepository.updateAll(user, where);
-  }
-
   @get('/users/{id}')
   @response(200, {
     description: 'User model instance',
@@ -104,8 +84,7 @@ export class UserController {
     @param.path.string('id') id: string,
     @param.filter(User, {exclude: 'where'}) filter?: FilterExcludingWhere<User>,
   ): Promise<User> {
-    const idToNumber = parseInt(id);
-    return this.userRepository.findById(idToNumber, filter);
+    return this.userRepository.findById(id, filter);
   }
 
   @patch('/users/{id}')
@@ -123,20 +102,7 @@ export class UserController {
     })
     user: User,
   ): Promise<void> {
-    const idToNumber = parseInt(id);
-    await this.userRepository.updateById(idToNumber, user);
-  }
-
-  @put('/users/{id}')
-  @response(204, {
-    description: 'User PUT success',
-  })
-  async replaceById(
-    @param.path.string('id') id: string,
-    @requestBody() user: User,
-  ): Promise<void> {
-    const idToNumber = parseInt(id);
-    await this.userRepository.replaceById(idToNumber, user);
+    await this.userRepository.updateById(id, user);
   }
 
   @del('/users/{id}')
@@ -144,7 +110,6 @@ export class UserController {
     description: 'User DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    const idToNumber = parseInt(id);
-    await this.userRepository.deleteById(idToNumber);
+    await this.userRepository.deleteById(id);
   }
 }
