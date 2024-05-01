@@ -1,0 +1,1 @@
+C:\SonarQube\sonar-scanner-5.0.1.3006-windows\bin\sonar-scanner.bat -D"sonar.projectKey=sample" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_016d12c875e9914c10e3b2f6c5a6760f232f776a"

@@ -1,6 +1,6 @@
 {
   "name": "lb4-crud-deploy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sample deployed crud project",
   "keywords": [
     "loopback-application",
@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": "18 || 20"
+    "node": "18 || 20 || 22"
   },
   "scripts": {
     "build": "lb-tsc",
@@ -35,7 +35,7 @@
     "start": "node -r source-map-support/register .",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
     "rebuild": "npm run clean && npm run build",
-    "dev": "nodemon"
+    "dev": "cross-env NODE_ENV=development nodemon"
   },
   "repository": {
     "type": "git",
