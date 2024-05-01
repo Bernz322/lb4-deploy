@@ -5,12 +5,17 @@ const config = {
   name: 'mongodb',
   connector: 'mongodb',
   url: '',
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host:
+    process.env.NODE_ENV === 'development' ? 'localhost' : process.env.DB_HOST,
+  user: process.env.NODE_ENV === 'development' ? 'admin' : process.env.DB_USER,
+  password:
+    process.env.NODE_ENV === 'development' ? '' : process.env.DB_PASSWORD,
+  database:
+    process.env.NODE_ENV === 'development'
+      ? 'lb4-test-crud'
+      : process.env.DB_NAME,
   useNewUrlParser: true,
-  protocol: 'mongodb+srv',
+  protocol: process.env.NODE_ENV === 'development' ? '' : 'mongodb+srv',
 };
 
 // Observe application's life cycle to disconnect the datasource when
